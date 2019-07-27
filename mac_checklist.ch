@@ -3,34 +3,44 @@
 MYUSER=oleg
 
 INSTALL_BREW=0
+INSTALL_WGET=0
 INSTALL_PYTHON3=0
 INSTALL_YOUTUBE_DL=0
 INSTALL_FFMPEG=0
-SET_SSH_KEYS=1
+SET_SSH_KEYS=0
 SSH_KEY_NAMES=("" bondit smode)
+SET_GIT_CONFIG=1
+INSTALL_PYCHARM=1
 
-if [[ ${INSTALL_BREW} == 1 ]]; then
+cd ~/Downloads
+
+if [[ ${INSTALL_BREW} -eq 1 ]]; then
     echo --------- installing brew
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
-if [[ ${INSTALL_PYTHON3} == 1 ]]; then
+if [[ ${INSTALL_WGET} -eq 1 ]]; then
+    echo --------- installing wget
+    brew install wget
+fi
+
+if [[ ${INSTALL_PYTHON3} -eq 1 ]]; then
     echo --------- installing python3
     brew install python3
     brew analytics off
 fi
 
-if [[ ${INSTALL_YOUTUBE_DL} == 1 ]]; then
+if [[ ${INSTALL_YOUTUBE_DL} -eq 1 ]]; then
     echo ---------- installing youtube-dl
     pip3 install youtube-dl
 fi
 
-if [[ ${INSTALL_FFMPEG} == 1 ]]; then
+if [[ ${INSTALL_FFMPEG} -eq 1 ]]; then
     echo ---------- installing ffmpeg
     brew install ffmpeg
 fi
 
-if [[ ${SET_SSH_KEYS} == 1 ]]; then
+if [[ ${SET_SSH_KEYS} -eq 1 ]]; then
     for SSH_KEY_NAME in "${SSH_KEY_NAMES[@]}"; do
         echo ---------- installing SSH key ${SSH_KEY_NAME}
 	DO_SSH=0
@@ -52,6 +62,21 @@ if [[ ${SET_SSH_KEYS} == 1 ]]; then
 	    ssh-add -K ~/.ssh/${SSH_KEY_NAME}
 	fi
     done
+fi
+
+if [[ "$SET_GIT_CONFIG" -eq 1 ]]; then
+    git config --global user.name "oleg"
+    git config --global user.email "oleg@work"
+fi
+
+if [[ ${INSTALL_PYCHARM} -eq 1 ]]; then
+    cd ~/Downloads
+    #wget https://download.jetbrains.com/python/pycharm-community-2019.1.2.dmg
+    # https://zeckli.github.io/en/2017/10/06/mac-install-dmg-through-command-line-en.html
+    hdiutil attach pycharm-community-2019.1.2.dmg
+    cp -rf '/Volumes/PyCharm CE/PyCharm CE.app' /Applications/.
+    hdiutil detach '/Volumes/PyCharm CE/'
+    #rm pycharm-community-2019.1.2.dmg
 fi
 
 echo done.
