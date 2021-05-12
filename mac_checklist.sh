@@ -4,30 +4,23 @@ MYUSER=oleg
 
 INSTALL_BREW=0
 INSTALL_WGET=0
-INSTALL_PYTHON3=0
 INSTALL_YOUTUBE_DL=0
 INSTALL_FFMPEG=0
-SET_SSH_KEYS=0
-SSH_KEY_NAMES=("" bondit smode)
-SET_GIT_CONFIG=1
-INSTALL_PYCHARM=1
+SET_SSH_KEYS=1
+SSH_KEY_NAMES=("" kz)
+SET_GIT_CONFIG=0
+INSTALL_PYCHARM=0
 
 cd ~/Downloads
 
 if [[ ${INSTALL_BREW} -eq 1 ]]; then
     echo --------- installing brew
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
 if [[ ${INSTALL_WGET} -eq 1 ]]; then
     echo --------- installing wget
     brew install wget
-fi
-
-if [[ ${INSTALL_PYTHON3} -eq 1 ]]; then
-    echo --------- installing python3
-    brew install python3
-    brew analytics off
 fi
 
 if [[ ${INSTALL_YOUTUBE_DL} -eq 1 ]]; then
