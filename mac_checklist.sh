@@ -1,9 +1,12 @@
 #!/bin/bash
 
+set -e
+
 INSTALL_BREW=0
 INSTALL_WGET=0
 INSTALL_YOUTUBE_DL=0
 INSTALL_FFMPEG=0
+INSTALL_WAKEONLAN=0
 INSTALL_PYCHARM=0
 SET_SSH_KEYS=0
 SSH_KEY_NAMES=("" kz)
@@ -49,6 +52,11 @@ fi
 if [[ ${INSTALL_FFMPEG} -eq 1 ]]; then
     echo ---------- installing ffmpeg
     brew install ffmpeg
+fi
+
+if [[ ${INSTALL_WAKEONLAN} -eq 1 ]]; then
+    echo ---------- installing wakeonlan
+    brew install wakeonlan
 fi
 
 if [[ ${INSTALL_PYCHARM} -eq 1 ]]; then
