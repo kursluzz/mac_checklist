@@ -4,6 +4,7 @@ set -e
 
 INSTALL_BREW=0
 INSTALL_WGET=0
+INSTALL_AWSCLI=0
 INSTALL_YOUTUBE_DL=0
 INSTALL_FFMPEG=0
 INSTALL_WAKEONLAN=0
@@ -43,6 +44,11 @@ fi
 if [[ ${INSTALL_WGET} -eq 1 ]]; then
     echo --------- installing wget
     brew install wget
+fi
+
+if [[ ${INSTALL_AWSCLI} -eq 1 ]]; then
+    echo --------- installing wget
+    brew install awscli
 fi
 
 if [[ ${INSTALL_YOUTUBE_DL} -eq 1 ]]; then
